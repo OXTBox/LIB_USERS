@@ -1,3 +1,11 @@
 # LIB_USERS
 
-Empty so far (made 2026-11-13). Its purpose is still to be written here.
+Who is at the controls, and who will be.
+
+| Folder | What |
+|---|---|
+| `personas/` | made-up players with real habits and real machine quirks, for testing installs and games: `PERSONAS.md`, `personas.tsv` (read by `LIB_PUBLIC/install/escape_sim.py`) |
+| `BILL/` | the owner's private notes (git-ignored, never published) |
+
+Planned (LIB_ALPHA section 2): the people and agents who work here (the owner, Claude, Spark,
+other agents), each with what they are for.
