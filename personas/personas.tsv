@@ -1,0 +1,13 @@
+id	username	who	documents	rights	library	habits	os_quirks
+dana	Dana	Plays a bit after work; takes every default, never opens a folder		admin		baseline	none
+ana	Ana Lucía Peña	Spanish Windows; her name, accent and spaces, is her user folder		admin		backup-saves	non-ascii-path,space-in-path
+kenji	健二	Japanese Windows; user folder in kanji, system code page 932		admin		run-direct	cjk-path,codepage-932
+morgan	Morgan	New laptop: OneDrive took over Documents on first sign-in	OneDrive\Documents	admin		backup-saves	onedrive-documents,files-on-demand,sync-conflict
+sam	Sam	Carries everything on a USB stick between home, school and a friend's		user	E:\VibeLibrary	portable,usb-letter-change	drive-letter-change,fat32
+riley	Riley	Small SSD; moved the games to a big D: drive by dragging the folder		admin	D:\Games	move-library	moved-folder
+jordan	Jordan	School PC: not an admin, Defender blocks unknown apps writing to Documents		user		run-from-zip	no-admin,controlled-folder-access,program-files-read-only
+pat	Pat	Hates launchers; uninstalls the store, keeps the game folders, may go Linux		admin		uninstall-launcher,copy-game-out,linux-later	case-sensitive-copy
+alex	Alex	Modder: edits the scripts in the game folders, then "verifies files"		admin		mod-in-place	files-reverted
+chris	Chris	Cleans the PC with a cleaner app every week: AppData and Temp get wiped		admin		delete-appdata	appdata-wiped
+lee	Lee	Family PC: two Windows accounts, one install		admin		second-account	shared-install
+taylor	Taylor	Downloads the zip and double-clicks the exe inside it		user		run-from-zip,copy-exe-to-desktop	mark-of-the-web,smartscreen,zip-temp
