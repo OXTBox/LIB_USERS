@@ -3,3 +3,6 @@
 __pycache__/
 *.pyc
 
+
+# private: never committed or published
+BILL/
