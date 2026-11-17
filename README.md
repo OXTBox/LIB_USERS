@@ -9,3 +9,5 @@ Who is at the controls, and who will be.
 
 Planned (LIB_ALPHA section 2): the people and agents who work here (the owner, Claude, Spark,
 other agents), each with what they are for.
+
+The plan for the library itself (titles, log stamps, the "may I" words): `PLAN.md`.
