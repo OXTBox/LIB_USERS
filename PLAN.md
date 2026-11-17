@@ -151,7 +151,7 @@ The rules that follow from the table:
 1. A window is laid out once, as a `.gui` file, and shown by any face. Nobody ports a window by hand.
 2. A new widget kind is added to LIB_GUI first (the format and the native face), then to the other faces.
 3. Colour is LIB_THEME's. Who is LIB_USERS's. What is on the launcher is LIB_TOOLBAR's. How it is drawn in raylib is LIB_RAYGUI's.
-4. A row of tools inside an app's own window (iGame3D XT's 26 tools) is ordinary `.gui` buttons belonging to that app. LIB_TOOLBAR is only the floating strip that sits outside every app.
+4. A row of tools inside an app's own window (iGame3D XT's 26 tools) is ordinary `.gui` buttons belonging to that app. LIB_TOOLBAR is only the floating strip that sits outside a window: the projects launcher, or an app's own tools floated the way the 2007 iGame3D main strip was.
 5. XTJSON stays the full, lossless record of a stack. A `.gui` file is the small design a person or Spark can write by hand. There is one tool, one way: XTJSON harvest to `.gui`.
 6. No script builds a window title by hand: it asks `Users.Title`.
 
