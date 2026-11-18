@@ -4,8 +4,8 @@ Tuesday, November 17, 2026. Found by a search of every `.livecodescript` under ~
 (TO_REMOVE and TEMPLATES_DO_NOT_COMMIT skipped). PLAN.md rule 6: no script builds a window
 title by hand; it asks `Users.Title` / `Users.TitleStack` (lib_users.livecodescript).
 
-**Nothing below has been changed yet.** Moving each script over is a later step, one script at
-a time, in its own repo, each with its own test. This file is the list to work from.
+**Section 1 moved on Tuesday, November 17, 2026 (late evening)**; see "What moved" below.
+Section 2 is still for the owner to decide.
 
 ## 1. Titles that say who the window is for (move these)
 
@@ -25,6 +25,34 @@ a time, in its own repo, each with its own test. This file is the list to work f
 Ten scripts. Three wordings are in use today (<NAME> = the owner's real name, written out in those scripts): `FOR <NAME> | ...`, `FOR OWNER | ...` and
 `FOR <NAME> name` with no bar. Six scripts still carry the owner's real name in git (1, 2, 6, 8,
 9, 10); moving them to `Users.Title` takes it out.
+
+### What moved (17 Nov 2026)
+
+One tiny pattern in every script, no helper handler: the plain title stays as the fallback, then
+
+    set the title of stack tS to "FOR OWNER |" && tWhat
+    dispatch "Users.TitleStack" with tS, tWhat   -- LIB_USERS words it, when in use
+
+`dispatch` does nothing (no error) when no handler answers, so a script with LIB_USERS not in
+use still works and says `FOR OWNER | ...`; with it in use, Users.Title words it (`Opus | ...`
+while an AI drives). Checked headless: without the library, with it, and under `lock messages`.
+
+| # | File | Repo / branch | What changed |
+|---|---|---|---|
+| 1 | game_launch | LIB_DEV, on-git-or-not | `FOR <NAME> |` -> `FOR OWNER |` + dispatch |
+| 2 | dev_version | LIB_DEV, on-git-or-not | pTitleWho kept for old callers (comment no longer names the owner), then dispatch `Users.TitleStack tName` |
+| 3 | collector | LIB_BUILD, users-title | dispatch added, form `"FOR"` (wording was already FOR OWNER) |
+| 4 | board_canvas | not changed | title comes from the board's data (`B title` row, else `FOR OWNER | Project Map`): already FOR OWNER, no name. On Git or Not's git_map.py already writes `FOR OWNER | On Git or Not`. Making the script add the head itself is left for a day the board work is open |
+| 5 | priority_tube | LIB_DEV, on-git-or-not | one dispatch line under the title line, nothing else |
+| 6 | window_shape_lab | LIB_DEV, on-git-or-not | `FOR <NAME> Shape Lab` -> `FOR OWNER | Shape Lab` + dispatch (test t38 updated to match) |
+| 7 | ScriptBlocks | LIB_SCRIPTBLOCKS, users-title | dispatch added (wording was already FOR OWNER) |
+| 8 | build_studio | LIB_TTRPG, users-title | `FOR OWNER |` + dispatch; About text says FOR OWNER |
+| 9 | RTS_Demo | LIB_RTS, users-title | `FOR OWNER | RTS_Demo: drag ...` + dispatch; About text too |
+| 10 | build_editor | LIB_BIT, users-title | `FOR OWNER | BitEditor` + dispatch |
+
+The owner's real name is out of all ten live scripts; it stays in their old commits (history is
+never rewritten). Stacks already built and saved (e.g. TTRPG_Studio, BitEditor) keep their old
+title until they are rebuilt or reopened.
 
 ## 2. Titles with no "who" at all (for the owner to decide)
 

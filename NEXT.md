@@ -18,8 +18,10 @@ Tuesday, November 17, 2026 (branch `users-title`, made from `library-plans`).
 
 ## Next
 
-1. Move the ten scripts in TITLES_TO_MOVE.md to `Users.Title`, one at a time, each in its own
-   repo with its test (game_launch, dev_version and collector first, as PLAN.md step 2 says).
+1. (done 17 Nov) The ten scripts in TITLES_TO_MOVE.md ask `Users.TitleStack` through
+   `dispatch`, falling back to `FOR OWNER | ...` (board_canvas left as is: its title is data and
+   already FOR OWNER). Branches: LIB_DEV on-git-or-not; users-title in LIB_BUILD,
+   LIB_SCRIPTBLOCKS, LIB_TTRPG, LIB_RTS, LIB_BIT.
 2. PLAN.md step 1 properly: `users.tsv`, `Users.Load` / `Users.List`, and `current.txt` in the
    Data folder (through LIB_DATA), so `Users.SetCurrent` is remembered and the roster, not a
    built-in list, says who is a person.
