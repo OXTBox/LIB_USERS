@@ -10,7 +10,7 @@ script "LIB_USERS"
 --                                                      -- "FOR OWNER | Press Space to start, H for help"
 --   Users.TitleStack "Theme_Studio", "pick a colour, press Save"   -- sets the TITLE, never the name
 --
--- Handlers: Users.Title, Users.TitleStack, Users.Driver, Users.Take, Users.HandTo,
+-- Handlers: Users.Title, Users.TitleStack, Users.IsBuilt, Users.SetBuilt, Users.Driver, Users.Take, Users.HandTo,
 -- Users.Current, Users.SetCurrent, Users.IsPerson.
 --
 -- This is the small first piece (the titles). Not here yet, see PLAN.md section 6:
@@ -24,6 +24,7 @@ script "LIB_USERS"
 global gUsersDriver   -- who has the controls now (a tag: OPUS, FABLE ...); empty = the person
 local sCurrentTag     -- the person's role at this machine (OWNER, PLAYER ...)
 local sCurrentName    -- the person's own name: kept for later (Data folder), never in titles
+local sBuilt          -- tests only: "true"/"false" pretends a built app or not; empty = ask the engine
 
 constant kPersonTags = "OWNER,PLAYER"
 constant kRoleTags = "OWNER,PLAYER,FABLE,OPUS,SONNET,HAIKU,SPARK,AGENT"
@@ -95,6 +96,11 @@ end Users.IsPerson
 -- "drive" = the driver's own window
 function Users.Title pWhat, pForm
    local tForm, tWho, tHead
+   -- a built (stand-alone) app is never edited, so nobody is "driving" it: its title is just
+   -- what it is (owner, 18 Nov: "it's who is controlling during editing that becomes an issue")
+   if pForm is empty and Users.IsBuilt() then
+      return pWhat
+   end if
    put pForm into tForm
    if tForm is empty then
       if Users.IsPerson(Users.Driver()) then
@@ -118,6 +124,18 @@ function Users.Title pWhat, pForm
    end if
    return tHead && "|" && pWhat
 end Users.Title
+
+-- true in a built (stand-alone) app; Users.SetBuilt true/false pretends, for tests; empty = the engine's word
+function Users.IsBuilt
+   if sBuilt is "true" or sBuilt is "false" then
+      return sBuilt
+   end if
+   return (the environment is "standalone application")
+end Users.IsBuilt
+
+on Users.SetBuilt pFlag
+   put pFlag into sBuilt
+end Users.SetBuilt
 
 -- sets the title (never the name) of stack pStack; pWhat empty = the stack's short name.
 -- The result is empty, or why not.

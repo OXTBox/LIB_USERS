@@ -215,6 +215,11 @@ a temporary Data folder (`Data.UseRoot`), so the real `current.txt` and `BILL/` 
 | 5 | `Vibe/About_vibe.txt`: is `Vibe` a user? | left untouched | No. "VIBE" means the V: drive, the C: simulation; `V:/Users/Public` is the generic test-install account |
 | 6 | Game saves and settings under `Data/Users/<name>/`? | not yet | No: follow the standard. Saves go in `Documents/My Games/<Game>`; game edits in `Documents/Vibecode3D/Data/Games/levels` (etc.). For now everything stays local to the app; settled in the LIB_PUBLIC release pass |
 
+Note (owner, 18 Nov, on NEXT.md): "stand alone builds don't get the "For Owner" or "Opus" etc
+title, because they won't be edited, its "Who is controlling during editing" that becomes an
+issue." Done: in a built app `Users.Title` returns just the words given (`Users.IsBuilt`); a form
+asked for on purpose (`"FOR"`, `"drive"`) still wins. Tested in t42 (32 pass).
+
 Note (owner, 18 Nov): Haiku, and any other model kept off the save list, may still have its
 own output folder, `LIB_LLMOUT/<TAG>/` (for example `LIB_LLMOUT/HAIKU/`), for the text and other
 content it produces. The owner or Opus reviews it there and moves what is kept into place.
