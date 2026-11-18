@@ -59,11 +59,11 @@ Personas are not copied in: `personas/personas.tsv` is read as more roster lines
 
 ```
 Documents/Data/Users/current.txt        who sits here:   OWNER <tab> BILL
-Documents/Data/Users/BILL/              that person's own settings and saves, later
+Documents/Data/Users/BILL/              that person's own notes (game saves do NOT go here: Documents/My Games/<Game>, section 9 #6)
 ```
 
 The role `OWNER` is in git; the name `BILL` is only on the owner's machine. On a stranger's PC
-the file is missing, so the person is `PLAYER` and the name is the PC's user name (`FOR DANA`).
+the file is missing, so the person is `PLAYER` (`FOR PLAYER`; titles never show a name, owner 18 Nov).
 This is how the public copy never carries the owner's name, and how Lee's family PC (two
 accounts) gets two names for free.
 
@@ -88,15 +88,15 @@ accounts) gets two names for free.
 ```
 start using stack ".../LIB_USERS/livecode/lib_users.livecodescript"
 
-put Users.Current() into tWho            -- BILL            (the person at this PC)
-put Users.Driver() into tWho             -- BILL, or FABLE while an AI drives
+put Users.Current() into tWho            -- OWNER           (the person at this PC, by role)
+put Users.Driver() into tWho             -- OWNER, or FABLE while an AI drives
 
 Users.Take "FABLE"                       -- an AI takes the controls (first line of any MCP session)
 Users.HandTo                             -- gives them back to the person
 
 put Users.Title("Theme_Studio") into tT  -- driving:  "Fable | Theme_Studio"
 put Users.Title("Press Space to start, H for help", "FOR") into tT
-                                         --           "FOR BILL | Press Space to start, H for help"
+                                         --           "FOR OWNER | Press Space to start, H for help"
 Users.TitleStack "Theme_Studio", "pick a colour, press Save"    -- sets the TITLE, never the name
 
 if not Users.May("save") then exit SaveLayout
@@ -130,7 +130,7 @@ estate"). Taken here:
 | Who drives | Title |
 |---|---|
 | an AI | `Fable | <stack or what is being tested>` (short family name, mixed case) |
-| a window for a person to try | `FOR BILL | <what to do first, which key for more>` |
+| a window for a person to try | `FOR OWNER | <what to do first, which key for more>` (the role, never a name) |
 | long form, only when asked (`Users.TitleStyle "address"`) | `127.0.0.1:8769 | Fable | <what>` |
 
 LIB_ALPHA rules 13 and 14 would then say "ask `Users.Title`" (a change for the owner to accept;
@@ -171,7 +171,7 @@ collector swap their hand-written titles for `Users.Title` (that is A-30).
 | Step | What | Done when |
 |---|---|---|
 | 1 | `users.tsv`, `Users.Load / List / Current / Driver / Take / HandTo` | headless test passes |
-| 2 | `Users.Title`, `Users.TitleStack`; swap the three hand-written titles (LIB_DEV, LIB_BUILD) | the owner sees `FOR BILL | ...` on the Game Player and `Opus | ...` while Opus drives |
+| 2 | `Users.Title`, `Users.TitleStack`; swap the three hand-written titles (LIB_DEV, LIB_BUILD) | the owner sees `FOR OWNER | ...` on the Game Player and `Opus | ...` while Opus drives |
 | 3 | `Users.Stamp`, `Users.Log` | a log line with a name in `Data/Work/Logs` |
 | 4 | `Users.May`; LIB_MCP calls Take / HandTo; the toolbar asks it | Spark's tag cannot save a stack in the test |
 | 5 | `Users.SetCurrent` for a persona (install tests and games share one "who") | escape sim reads the same roster |
@@ -185,7 +185,7 @@ a temporary Data folder (`Data.UseRoot`), so the real `current.txt` and `BILL/` 
 
 - the roster loads: 8 roles and 12 personas; a broken line is reported, not swallowed
 - no `current.txt`: the current user is `PLAYER` with the PC's user name
-- `Users.SetCurrent "OWNER","BILL"` then `Users.Title("x","FOR")` is `FOR BILL | x`
+- `Users.SetCurrent "OWNER","BILL"` then `Users.Title("x","FOR")` is `FOR OWNER | x` (the name is never shown)
 - `Users.Take "FABLE"`: `Users.Title("x")` is `Fable | x`; `Users.May("publish")` is false
 - `Users.Take "SPARK"`: `Users.May("save")` false, `Users.May("draft")` true
 - `Users.May("private")` is false for every `ai`, `local-ai` and `persona`
@@ -204,13 +204,13 @@ a temporary Data folder (`Data.UseRoot`), so the real `current.txt` and `BILL/` 
 | Putting personas and workers in one file | personas are test data with their own columns and their own reader (`escape_sim.py`) |
 | Keeping the MCP address in every title | the owner asked for short titles; the long form stays as an option |
 
-## 9. Questions only the owner can answer
+## 9. Questions only the owner can answer (answered 18 Nov 2026)
 
-| # | Question | Default taken |
-|---|---|---|
-| 1 | The users list and short tags (O-9) | OWNER, PLAYER, FABLE, OPUS, SONNET, HAIKU, SPARK, AGENT, plus the twelve personas |
-| 2 | Your name in titles: `FOR BILL` or `FOR OWNER`? | `FOR BILL` on your machine (kept in the Data folder, never in git); a stranger sees their own PC user name |
-| 3 | Title wording: short (`Fable | Theme_Studio`) or LIB_ALPHA's long form with the address? | short; the long form on request |
-| 4 | May an AI save stacks without asking? | yes for Fable, Opus, Sonnet (on a branch, as now); never Spark; nobody but you publishes or merges |
-| 5 | `Vibe/About_vibe.txt`: is `Vibe` a user (a house persona for the public page), or something else? | left untouched; read as your sketch of "one folder a user with an About file", which `Users.About` follows |
-| 6 | Should game saves and settings move under `Data/Users/<name>/` (two accounts on one PC)? | not yet: only `current.txt` goes there now; saves stay where LIB_DATA puts them |
+| # | Question | Default taken | Owner's answer (18 Nov) |
+|---|---|---|---|
+| 1 | The users list and short tags (O-9) | OWNER, PLAYER, FABLE, OPUS, SONNET, HAIKU, SPARK, AGENT, plus the twelve personas | Kept. Personas have all lower case names, so they are never taken for an LLM (`Users.Tag`, done) |
+| 2 | Your name in titles: `FOR BILL` or `FOR OWNER`? | `FOR BILL` on your machine | **`FOR OWNER`**: safer for screenshots, protects other people's privacy. Titles say the role, never a name (done: a stranger sees `FOR PLAYER`) |
+| 3 | Title wording: short or long form with the address? | short; long on request | Short by default, long on request; the long form will be needed for multiplayer games and remote devices |
+| 4 | May an AI save stacks without asking? | yes for Fable, Opus, Sonnet; never Spark; only you publish or merge | Yes, as taken. Keep Spark working exactly as it works now |
+| 5 | `Vibe/About_vibe.txt`: is `Vibe` a user? | left untouched | No. "VIBE" means the V: drive, the C: simulation; `V:/Users/Public` is the generic test-install account |
+| 6 | Game saves and settings under `Data/Users/<name>/`? | not yet | No: follow the standard. Saves go in `Documents/My Games/<Game>`; game edits in `Documents/Vibecode3D/Data/Games/levels` (etc.). For now everything stays local to the app; settled in the LIB_PUBLIC release pass |

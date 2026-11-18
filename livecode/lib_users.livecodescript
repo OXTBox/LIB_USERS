@@ -17,29 +17,37 @@ script "LIB_USERS"
 -- users.tsv and Users.Load / List, current.txt in the Data folder (so SetCurrent is in memory
 -- only for now), Users.Stamp / Log, Users.May, the long "address" title style.
 -- No real names in this file: the person at this machine is "OWNER" until told otherwise.
+-- Owner's answers (18 Nov, PLAN.md section 9): titles say the ROLE, never a name ("FOR OWNER",
+-- safe in screenshots); role and AI tags are capitals, personas are all lower case (so a
+-- persona is never mistaken for an LLM).
 
 global gUsersDriver   -- who has the controls now (a tag: OPUS, FABLE ...); empty = the person
 local sCurrentTag     -- the person's role at this machine (OWNER, PLAYER ...)
-local sCurrentName    -- the name shown in "FOR <name>" titles
+local sCurrentName    -- the person's own name: kept for later (Data folder), never in titles
 
 constant kPersonTags = "OWNER,PLAYER"
+constant kRoleTags = "OWNER,PLAYER,FABLE,OPUS,SONNET,HAIKU,SPARK,AGENT"
 
--- the person at this machine (the name shown in FOR titles)
+-- a tag as it is written: roles and AIs in capitals, anything else (a persona) in lower case
+function Users.Tag pTag
+   if toUpper(pTag) is among the items of kRoleTags then
+      return toUpper(pTag)
+   end if
+   return toLower(pTag)
+end Users.Tag
+
+-- the person at this machine, by role (what FOR titles show)
 function Users.Current
-   if sCurrentName is empty then
+   if sCurrentTag is empty then
       return "OWNER"
    end if
-   return sCurrentName
+   return sCurrentTag
 end Users.Current
 
 -- in memory only for now; later it writes Data/Users/current.txt
 command Users.SetCurrent pTag, pName
-   put toUpper(pTag) into sCurrentTag
-   if pName is empty then
-      put sCurrentTag into sCurrentName
-   else
-      put toUpper(pName) into sCurrentName
-   end if
+   put Users.Tag(pTag) into sCurrentTag
+   put pName into sCurrentName
 end Users.SetCurrent
 
 -- who has the controls now: the taken tag, else $XT_USER (a headless run started by an AI),
@@ -49,13 +57,13 @@ function Users.Driver
       return gUsersDriver
    end if
    if $XT_USER is not empty then
-      return toUpper($XT_USER)
+      return Users.Tag($XT_USER)
    end if
    return Users.Current()
 end Users.Driver
 
 command Users.Take pTag
-   put toUpper(pTag) into gUsersDriver
+   put Users.Tag(pTag) into gUsersDriver
 end Users.Take
 
 -- give the controls back; with no tag, to the person at this machine
@@ -63,20 +71,21 @@ command Users.HandTo pTag
    if pTag is empty then
       put Users.Current() into gUsersDriver
    else
-      put toUpper(pTag) into gUsersDriver
+      put Users.Tag(pTag) into gUsersDriver
    end if
 end Users.HandTo
 
--- true when pWho is a person (gets "FOR" titles), false for an AI or other agent
+-- true when pWho is a person (gets "FOR" titles), false for an AI or other agent.
+-- A persona (a tag that is not a role) is a made-up person, so it counts as a person.
 function Users.IsPerson pWho
-   put toUpper(pWho) into pWho
+   put Users.Tag(pWho) into pWho
    if pWho is among the items of kPersonTags then
       return true
    end if
    if pWho is Users.Current() then
       return true
    end if
-   if pWho is sCurrentTag and sCurrentTag is not empty then
+   if pWho is not among the items of kRoleTags then
       return true
    end if
    return false
@@ -98,7 +107,11 @@ function Users.Title pWhat, pForm
       put "FOR" && Users.Current() into tHead
    else
       put Users.Driver() into tWho
-      put toUpper(char 1 of tWho) & toLower(char 2 to -1 of tWho) into tHead
+      if tWho is among the items of kRoleTags then
+         put toUpper(char 1 of tWho) & toLower(char 2 to -1 of tWho) into tHead
+      else
+         put tWho into tHead
+      end if
    end if
    if pWhat is empty then
       return tHead

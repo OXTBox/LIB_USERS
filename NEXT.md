@@ -16,6 +16,14 @@ Tuesday, November 17, 2026 (branch `users-title`, made from `library-plans`).
 - TITLES_TO_MOVE.md: the ten scripts that still word their titles by hand, and ten more
   windows with no "who" in the title.
 
+## Done 18 Nov (owner's answers from the Project Map)
+
+- Titles show the role, never a name: `FOR OWNER`, a stranger `FOR PLAYER`.
+- `Users.Tag`: role and AI tags in capitals, personas all lower case (`kenji | x`, `FOR dana | x`).
+- t42_users_title: 26 checks, all pass headless.
+- Saves: `Documents/My Games/<Game>`; game edits `Documents/Vibecode3D/Data/Games/levels`;
+  settled in the LIB_PUBLIC release pass (noted in LIB_PUBLIC/install/LAYOUT.md).
+
 ## Next
 
 1. (done 17 Nov) The ten scripts in TITLES_TO_MOVE.md ask `Users.TitleStack` through
@@ -30,8 +38,8 @@ Tuesday, November 17, 2026 (branch `users-title`, made from `library-plans`).
 
 ## For the owner to decide
 
-- Until `current.txt` exists, the person at the machine shows as `FOR OWNER`. The plan's
-  default is your own name from the Data folder on your machine; say which you want.
+- (answered 18 Nov) Titles say `FOR OWNER`, never a name; personas are lower case.
+  All six PLAN.md section 9 answers are written into the plan.
 - Whether windows with no "who" today (game windows, the launcher, servers) should get one.
 - LIB_ALPHA rules 13 and 14 still give the old long wording; the plan suggests they say "ask
   `Users.Title`". Not changed here.
