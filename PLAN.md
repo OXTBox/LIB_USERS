@@ -211,9 +211,14 @@ a temporary Data folder (`Data.UseRoot`), so the real `current.txt` and `BILL/` 
 | 1 | The users list and short tags (O-9) | OWNER, PLAYER, FABLE, OPUS, SONNET, HAIKU, SPARK, AGENT, plus the twelve personas | Kept. Personas have all lower case names, so they are never taken for an LLM (`Users.Tag`, done) |
 | 2 | Your name in titles: `FOR BILL` or `FOR OWNER`? | `FOR BILL` on your machine | **`FOR OWNER`**: safer for screenshots, protects other people's privacy. Titles say the role, never a name (done: a stranger sees `FOR PLAYER`) |
 | 3 | Title wording: short or long form with the address? | short; long on request | Short by default, long on request; the long form will be needed for multiplayer games and remote devices |
-| 4 | May an AI save stacks without asking? | yes for Fable, Opus, Sonnet; never Spark; only you publish or merge | Yes, as taken. Keep Spark working exactly as it works now |
+| 4 | May an AI save stacks without asking? | yes for Fable, Opus, Sonnet; never Spark; only you publish or merge | Yes, as taken: Fable, Opus, Sonnet. **Haiku does not save stacks for now** (owner, 18 Nov). Keep Spark working exactly as it works now |
 | 5 | `Vibe/About_vibe.txt`: is `Vibe` a user? | left untouched | No. "VIBE" means the V: drive, the C: simulation; `V:/Users/Public` is the generic test-install account |
 | 6 | Game saves and settings under `Data/Users/<name>/`? | not yet | No: follow the standard. Saves go in `Documents/My Games/<Game>`; game edits in `Documents/Vibecode3D/Data/Games/levels` (etc.). For now everything stays local to the app; settled in the LIB_PUBLIC release pass |
+
+Note (owner, 18 Nov): Haiku, and any other model kept off the save list, may still have its
+own output folder, `LIB_LLMOUT/<TAG>/` (for example `LIB_LLMOUT/HAIKU/`), for the text and other
+content it produces. The owner or Opus reviews it there and moves what is kept into place.
+Not made yet: the folder is created the first time such a model is given work.
 
 ## 10. The owner's earlier answers (17 Nov 2026; section 9 of 18 Nov is the latest word)
 
@@ -221,6 +226,6 @@ a temporary Data folder (`Data.UseRoot`), so the real `current.txt` and `BILL/` 
 |---|---|
 | 2 | **`FOR OWNER`**, not a name: clear, and safe in screenshots. So `current.txt` holds the role only and no real name is needed anywhere (a stranger's PC still shows `FOR PLAYER` or their PC user name: to decide when built). |
 | 3 | The bar is fine: `Opus | Theme_Studio`, `FOR OWNER | <what to do first>`. |
-| 4 | Claude models (Fable, Opus, Sonnet, Haiku) may save stacks: "for our use absolutely". Spark still drafts only, until its OXT-Beyond use is tested. |
+| 4 | Claude models (Fable, Opus, Sonnet, Haiku) may save stacks: "for our use absolutely". Spark still drafts only, until its OXT-Beyond use is tested. (18 Nov: Haiku taken off the save list for now; see section 9 #4.) |
 | 5 | `VIBE` is the label of the V: drive: a plain simulated C: for testing a real Vibecode3D / xt3d install, plus the owner's apps for Claude (OXT-Beyond) and documents kept out of git. Not a user. `Vibe/About_vibe.txt` stays as it is. |
 | 1, 6 | still open (defaults stand). |
