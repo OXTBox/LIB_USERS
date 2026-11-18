@@ -10,4 +10,4 @@ Who is at the controls, and who will be.
 Planned (LIB_ALPHA section 2): the people and agents who work here (the owner, Claude, Spark,
 other agents), each with what they are for.
 
-`PLAN.md`: the plan for the LIB_USERS library (who is at the controls, window titles, log stamps, "may I" words). Kept by the owner 17 Nov 2026; answers in its section 10.
+`PLAN.md`: the plan for the LIB_USERS library (who is at the controls, window titles, log stamps, "may I" words). Kept by the owner 17 Nov 2026; his answers in sections 9 (18 Nov) and 10 (17 Nov).
