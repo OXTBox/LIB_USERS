@@ -11,3 +11,7 @@ Planned (LIB_ALPHA section 2): the people and agents who work here (the owner, C
 other agents), each with what they are for.
 
 `PLAN.md`: the plan for the LIB_USERS library (who is at the controls, window titles, log stamps, "may I" words). Kept by the owner 17 Nov 2026; his answers in sections 9 (18 Nov) and 10 (17 Nov).
+
+## Licence
+
+GPL-3.0 (see `LICENSE`), because the xTalk work here is built on the GPL-licensed LiveCode Community 9 engine. Copyright (c) 2026 xAction.
