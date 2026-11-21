@@ -1,0 +1,2 @@
+Vibe is the simulated Vibecode3D users environment.
+Start by saving the entire relevant properties manifest to folder in Vibe/Documents/ each game save all the properties relavant to a vibe game and python game and an xt3d game to the appropriate x
